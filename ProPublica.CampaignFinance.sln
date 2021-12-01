@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProPublica.CampaignFinance", "ProPublica.CampaignFinance\ProPublica.CampaignFinance.csproj", "{CA01FBFE-350E-4C08-9146-EB50C99C9744}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA01FBFE-350E-4C08-9146-EB50C99C9744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA01FBFE-350E-4C08-9146-EB50C99C9744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA01FBFE-350E-4C08-9146-EB50C99C9744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA01FBFE-350E-4C08-9146-EB50C99C9744}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E5926DB-17B1-4A65-846C-B61738C2005D}
+	EndGlobalSection
+EndGlobal

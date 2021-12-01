@@ -1,0 +1,22 @@
+name: publish
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+      - name: Get version from tag
+        id: version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+      - name: Create package
+        run: dotnet pack --configuration Release --output dist /p:PackageVersion=${{ steps.version.outputs.VERSION }}
+      - name: Push to GitHub Packages
+        run: dotnet nuget push ./dist/*.nupkg --source https://nuget.pkg.github.com/mattheiler/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
