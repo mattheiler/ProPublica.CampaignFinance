@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProPublica.CampaignFinance.Http
 {
-    public sealed class ClientRequestQuery : NameValueCollection
+    public sealed class ClientRequestQuery : Dictionary<string, object>
     {
         internal ClientRequestQuery()
             : base(StringComparer.OrdinalIgnoreCase)
@@ -18,7 +18,7 @@ namespace ProPublica.CampaignFinance.Http
 
         public override string ToString()
         {
-            return string.Join("&", Keys.Cast<string>().Select(key => $"{key}={Get(key)}"));
+            return string.Join("&", Keys.Select((key, value) => $"{key}={value}"));
         }
     }
 }

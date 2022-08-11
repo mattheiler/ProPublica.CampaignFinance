@@ -26,8 +26,7 @@ namespace ProPublica.CampaignFinance.Http
 
         public IEnumerable<string> GetErrors()
         {
-            return _token.SelectToken("errors/error")?.Select(error => error.ToObject<string>(Serializer)) ??
-                   Enumerable.Empty<string>();
+            return _token.SelectToken("errors/error")?.Select(error => error.ToObject<string>(Serializer)) ?? Enumerable.Empty<string>();
         }
 
         public string GetMessage()
@@ -37,8 +36,7 @@ namespace ProPublica.CampaignFinance.Http
 
         public ClientResponseStatus GetStatus()
         {
-            return Enum.TryParse<ClientResponseStatus>(_token.SelectToken("status")?.ToObject<string>(Serializer), true,
-                out var status)
+            return Enum.TryParse<ClientResponseStatus>(_token.SelectToken("status")?.ToObject<string>(Serializer), true, out var status)
                 ? status
                 : ClientResponseStatus.Error;
         }

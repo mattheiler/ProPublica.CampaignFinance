@@ -58,8 +58,7 @@ namespace ProPublica.CampaignFinance.Http
             return GetAsync(request);
         }
 
-        private async Task<ClientResponse> GetAsync(ClientRequest request,
-            CancellationToken cancellationToken = default)
+        private async Task<ClientResponse> GetAsync(ClientRequest request, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -106,11 +105,8 @@ namespace ProPublica.CampaignFinance.Http
                     return status switch
                     {
                         ClientResponseStatus.Ok => results,
-                        ClientResponseStatus.Error => throw new InvalidOperationException(
-                            string.Join(Environment.NewLine, results.GetErrors())),
-                        ClientResponseStatus.InternalServerError => throw new InvalidOperationException(
-                            "Internal server error!"),
-                        _ => throw new ArgumentOutOfRangeException($"Invalid response status: {status}.")
+                        ClientResponseStatus.Error => throw new InvalidOperationException(string.Join(Environment.NewLine, results.GetErrors())),
+                        ClientResponseStatus.InternalServerError => throw new InvalidOperationException("Internal server error!"), _ => throw new ArgumentOutOfRangeException($"Invalid response status: {status}.")
                     };
                 }
             }
@@ -152,8 +148,7 @@ namespace ProPublica.CampaignFinance.Http
             return response.Many<CandidateFromAState>();
         }
 
-        public async Task<IEnumerable<CandidateFromAState>> GetCandidatesFromState(int cycle, string state,
-            string chamber, int district)
+        public async Task<IEnumerable<CandidateFromAState>> GetCandidatesFromState(int cycle, string state, string chamber, int district)
         {
             // house or senate
             // don’t include for states with a single representative (AL, DE, DC, MT, ND, SD, VT). (house requests only - districts with senate requests will be ignored.)
@@ -185,8 +180,7 @@ namespace ProPublica.CampaignFinance.Http
             return response.Many<LateContribution>();
         }
 
-        public async Task<IEnumerable<LateContribution>> GetRecentLateContributionsByDate(int cycle, int year,
-            int month, int day)
+        public async Task<IEnumerable<LateContribution>> GetRecentLateContributionsByDate(int cycle, int year, int month, int day)
         {
             var response = await GetAsync($"{cycle}/contributions/48hour/{year}/{month}/{day}.json");
             return response.Many<LateContribution>();
@@ -235,8 +229,7 @@ namespace ProPublica.CampaignFinance.Http
             return response.Many<ElectronicFiling>();
         }
 
-        public async Task<IEnumerable<ElectronicFiling>> GetElectronicFilingsByDate(int cycle, int year, int month,
-            int day)
+        public async Task<IEnumerable<ElectronicFiling>> GetElectronicFilingsByDate(int cycle, int year, int month, int day)
         {
             var response = await GetAsync($"{cycle}/filings/{year}/{month}/{day}.json");
             return response.Many<ElectronicFiling>();
@@ -281,30 +274,26 @@ namespace ProPublica.CampaignFinance.Http
             return GetIndependentExpendituresByDate(cycle, date.Year, date.Month, date.Day);
         }
 
-        public async Task<IEnumerable<IndependentExpenditure>> GetIndependentExpendituresByCommittee(int cycle,
-            string fedId)
+        public async Task<IEnumerable<IndependentExpenditure>> GetIndependentExpendituresByCommittee(int cycle, string fedId)
         {
             var response = await GetAsync($"{cycle}/committees/{fedId}/independent_expenditures.json");
             return response.Many<IndependentExpenditure>();
         }
 
-        public async Task<IEnumerable<IndependentExpenditure>> GetIndependentExpendituresThatSupportOrOpposeCandidate(
-            int cycle, string fedId)
+        public async Task<IEnumerable<IndependentExpenditure>> GetIndependentExpendituresThatSupportOrOpposeCandidate(int cycle, string fedId)
         {
             var response = await GetAsync($"{cycle}/candidates/{fedId}/independent_expenditures.json");
             return response.Many<IndependentExpenditure>();
         }
 
-        public async Task<IEnumerable<IndependentExpenditureRaceTotal>> GetIndependentExpenditureRaceTotalsForOffice(
-            int cycle, string office)
+        public async Task<IEnumerable<IndependentExpenditureRaceTotal>> GetIndependentExpenditureRaceTotalsForOffice(int cycle, string office)
         {
             // senate, house, president
             var response = await GetAsync($"{cycle}/independent_expenditures/race_totals/{office}.json");
             return response.Many<IndependentExpenditureRaceTotal>();
         }
 
-        public async Task<IEnumerable<IndependentExpenditureRaceTotal>> GetIndependentExpenditureRaceTotalsForCommittee(
-            int cycle, string fecId)
+        public async Task<IEnumerable<IndependentExpenditureRaceTotal>> GetIndependentExpenditureRaceTotalsForCommittee(int cycle, string fecId)
         {
             var response = await GetAsync($"{cycle}/committees/{fecId}/independent_expenditures/races.json");
             return response.Many<IndependentExpenditureRaceTotal>();
@@ -320,22 +309,19 @@ namespace ProPublica.CampaignFinance.Http
             return response.Many<ElectioneeringCommunication>();
         }
 
-        public async Task<IEnumerable<ElectioneeringCommunication>> GetElectioneeringCommunicationsByCommittee(
-            int cycle, string fecId)
+        public async Task<IEnumerable<ElectioneeringCommunication>> GetElectioneeringCommunicationsByCommittee(int cycle, string fecId)
         {
             var response = await GetAsync($"{cycle}/committees/{fecId}/electioneering_communications.json");
             return response.Many<ElectioneeringCommunication>();
         }
 
-        public async Task<IEnumerable<ElectioneeringCommunication>> GetElectioneeringCommunicationsByDate(int cycle,
-            int year, int month, int day)
+        public async Task<IEnumerable<ElectioneeringCommunication>> GetElectioneeringCommunicationsByDate(int cycle, int year, int month, int day)
         {
             var response = await GetAsync($"{cycle}/electioneering_communications/{year}/{month}/{day}.json.json");
             return response.Many<ElectioneeringCommunication>();
         }
 
-        public Task<IEnumerable<ElectioneeringCommunication>> GetElectioneeringCommunicationsByDate(int cycle,
-            DateTime date)
+        public Task<IEnumerable<ElectioneeringCommunication>> GetElectioneeringCommunicationsByDate(int cycle, DateTime date)
         {
             return GetElectioneeringCommunicationsByDate(cycle, date.Year, date.Month, date.Day);
         }
